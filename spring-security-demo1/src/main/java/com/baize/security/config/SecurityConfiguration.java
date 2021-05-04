@@ -39,8 +39,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
-                .loginPage("/login")    //用户未登录时，访问任何需要权限的资源都转跳到该路径，即登录页面，此时登陆成功后会继续跳转到第一次访问的资源页面（相当被拦截了一下）
-                .defaultSuccessUrl("/user") //登录认证成功后默认转跳的路径，意思时admin登录后也跳转到user
+                .loginPage("/login")    //用户未登录时，访问任何需要权限的资源都转跳到该路径，即登录页面，此时登陆成功后会继续跳转到第一次访问的资源页面（相当于被过滤了一下）
+                .defaultSuccessUrl("/user") //登录认证成功后默认转跳的路径，意思时admin登录后也跳转到/user
                 .and()
                 .logout()
                 .logoutUrl("/logout")   //退出登陆的路径，指定spring security拦截的注销url,退出功能是security提供的
