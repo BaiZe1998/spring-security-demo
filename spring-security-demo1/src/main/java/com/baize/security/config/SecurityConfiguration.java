@@ -1,5 +1,6 @@
 package com.baize.security.config;
 
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
         /**
          * 在内存中创建一个名为 "user" 的用户，密码为 "123"，拥有 "USER" 权限，密码使用BCryptPasswordEncoder加密
          */
@@ -27,6 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**
      * 给出了访问指定路径下的资源需要的角色（权限）
+     * /user/**表示访问/user/目录下的所有资源都需要USER权限
+     * /admin/**表示访问/admin/目录下的所有资源都需要ADMIN权限
      * @param http
      * @throws Exception
      */
