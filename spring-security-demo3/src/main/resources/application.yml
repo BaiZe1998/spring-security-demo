@@ -1,0 +1,12 @@
+#开启数据表字段名下划线和实体类属性的驼峰规则映射
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.baize.security.entity
+spring:
+  datasource:
+    url: jdbc:mysql://121.196.42.104:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver

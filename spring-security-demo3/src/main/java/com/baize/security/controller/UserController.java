@@ -1,16 +1,25 @@
 package com.baize.security.controller;
 
+import com.baize.security.entity.User;
+import com.baize.security.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.security.Principal;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/user")
     public String user(Model model){
@@ -31,5 +40,12 @@ public class UserController {
         model.addAttribute("username", username);
         model.addAttribute("authority", authority);
         return "admin/admin";
+    }
+
+    @ResponseBody
+    @RequestMapping("getUser/{name}")
+    public String getUser(@PathVariable String name) {
+        User user = userService.findByName(name);
+        return userService.findByName(name).toString();
     }
 }
