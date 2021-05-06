@@ -1,5 +1,6 @@
 package com.baize.security.controller;
 
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

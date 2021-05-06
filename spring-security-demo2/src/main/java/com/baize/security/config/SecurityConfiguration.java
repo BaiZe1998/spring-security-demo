@@ -1,10 +1,12 @@
 package com.baize.security.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -12,6 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private BaiZeAuthenticationProvider baiZeAuthenticationProvider;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -25,6 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
          */
         auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
                 .withUser("admin").password(new BCryptPasswordEncoder().encode("123")).roles("USER","ADMIN");
+        /**
+         * 将自定义的验证器类注册进去
+         */
+        auth.authenticationProvider(baiZeAuthenticationProvider);
     }
 
     /**
