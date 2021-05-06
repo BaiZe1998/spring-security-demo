@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用户页</title>
+</head>
+<body>
+    <h1>用户页</h1>
+    <p th:text="${username}">BaiZe</p>
+    <p>您好，您的权限是</p>
+    <p th:text="${authority}"></p>
+    <form th:action="@{/logout}" method="post">
+        <button class="btn btn-danger">退出登录</button>
+    </form>
+    <a href="/index">主页</a>
+    <a href="/user">用户页</a>
+    <a href="/admin">管理员页</a>
+    <a href="/login">登录</a>
+</body>
+</html>
