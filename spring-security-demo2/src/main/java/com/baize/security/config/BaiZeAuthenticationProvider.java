@@ -35,6 +35,11 @@ public class BaiZeAuthenticationProvider implements AuthenticationProvider {
         }
     }
 
+    /**
+     * support方法检查authentication的类型是不是这个AuthenticationProvider支持的
+     * @param aClass
+     * @return
+     */
     @Override
     public boolean supports(Class<?> aClass) {
         return aClass.equals(
