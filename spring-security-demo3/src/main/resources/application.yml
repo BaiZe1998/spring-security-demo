@@ -10,3 +10,8 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+#添加mapper层的sql语句输出，有利于程序的调试
+logging:
+  level:
+    com.baize.security: debug
+    com.baize.security.mapper: debug

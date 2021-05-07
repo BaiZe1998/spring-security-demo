@@ -1,5 +1,6 @@
 package com.baize.security.config;
 
+import com.baize.security.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,6 +19,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private BaiZeAuthenticationProvider baiZeAuthenticationProvider;
 
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -35,6 +39,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
          * 将自定义的验证器类注册进去
          */
         auth.authenticationProvider(baiZeAuthenticationProvider);
+        /**
+         * 加入数据库验证类，下面的语句实际上在验证链中加入了一个DaoAuthenticationProvider
+         */
+        auth.userDetailsService(myUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     /**

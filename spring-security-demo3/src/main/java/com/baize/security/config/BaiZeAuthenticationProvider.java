@@ -7,7 +7,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -27,8 +26,8 @@ public class BaiZeAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
         if (username.equals("baize")) {
             Collection<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));  //ROLE_ADMIN写法是固定的
-            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));   //ROLE_USER写法是固定的
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));  //这里的权限格式为ROLE_XXX，是Spring Security规定的
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
             return new UsernamePasswordAuthenticationToken(username, password, authorities);
         } else {
             return null;

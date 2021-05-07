@@ -1,6 +1,10 @@
 package com.baize.security.controller;
 
+import com.baize.security.entity.Role;
 import com.baize.security.entity.User;
+import com.baize.security.entity.UserRole;
+import com.baize.security.service.RoleService;
+import com.baize.security.service.UserRoleService;
 import com.baize.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.ProviderManager;
@@ -14,12 +18,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private UserRoleService userRoleService;
 
     @RequestMapping("/user")
     public String user(Model model){
@@ -42,10 +53,24 @@ public class UserController {
         return "admin/admin";
     }
 
-    @ResponseBody
-    @RequestMapping("getUser/{name}")
-    public String getUser(@PathVariable String name) {
-        User user = userService.findByName(name);
-        return userService.findByName(name).toString();
-    }
+//    @ResponseBody
+//    @RequestMapping("getUser/{name}")
+//    public String getUser(@PathVariable String name) {
+//        User user = userService.findByName(name);
+//        return userService.findByName(name).toString();
+//    }
+//
+//    @ResponseBody
+//    @RequestMapping("getList/{id}")
+//    public String getList(@PathVariable long id) {
+//        List<UserRole> userRoles = userRoleService.listByUserId(id);
+//        return userRoles.toString();
+//    }
+//
+//    @ResponseBody
+//    @RequestMapping("getRole/{id}")
+//    public String getRole(@PathVariable long id) {
+//        Role role = roleService.findById(id);
+//        return role.toString();
+//    }
 }
